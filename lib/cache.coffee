@@ -26,7 +26,7 @@
 MongoCache = require 'mongo-cache'
 
 # exports
-exports = (config) ->
+module.exports = exports = (config) ->
 
   # defaults
   config.disabled ?= false
@@ -59,15 +59,17 @@ exports = (config) ->
     # handle request
     (req, res, next) ->
 
-      # if disabled, don't use cache
-      if options.disabled
+      fetch = (callback) ->
         if fn.length == 1
-          fn (data) ->
-            res.send data
+          fn callback
         else
-          fn req, req, (data) ->
-            res.send data
-        return
+          fn req, req, callback
+
+      # if disabled, don't use cache
+      return fetch(res.send) if config.disabled
+
+      # if it's a POST, don't use cache
+      return fetch(res.send) if req.method is 'POST'
 
       # setup cache key
       protocol = req.protocol
@@ -76,6 +78,7 @@ exports = (config) ->
       url_noquery = req._parsedUrl.pathname
 
       key = "#{protocol}://#{host}#{url_noquery}"
+      options.query ?= options.qs
       options.query ?= '*'
 
       # allow comma separated fields
@@ -116,15 +119,11 @@ exports = (config) ->
       res.set 'Surrogate-Key', "#{host} #{key}"
 
       # check cache
-      mcache.get key, (err, value) ->
+      cache.get key, (err, value) ->
         return res.send value if value
-        set = (data) ->
-          mcache.set key, data, options.age, (err) ->
+        fetch (data) ->
+          cache.set key, data, options.age, (err) ->
             res.send data
-        if fn.length == 1
-          fn set
-        else
-          fn req, req, set
 
 
 
