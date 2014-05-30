@@ -36,11 +36,16 @@ module.exports = exports = (config) ->
     # handle request
     (req, res, next) ->
 
+      # get data
       fetch = (callback) ->
         if fn.length == 1
           fn callback
         else
-          fn req, req, callback
+          fn req, res, callback
+
+      # custom headers
+      options.headers ?= {}
+      res.set options.headers
 
       # if disabled, don't use cache
       return fetch((d) -> res.send d) if config.disabled
@@ -88,7 +93,7 @@ module.exports = exports = (config) ->
           if query.length > 0
             key = "#{protocol}://#{host}#{url_noquery}?#{query.join '&'}"
 
-      # headers
+      # cache headers
       if options.age == 0
         cval = 'private, max-age=0, no-cache, no-store, must-revalidate'
         sval = 'max-age=0'

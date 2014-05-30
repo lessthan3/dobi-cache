@@ -1,3 +1,7 @@
+**v1.3.0** (2014-05-30)
+
+ - set headers for cached responses
+
 **v1.2.0** (2014-05-29)
 
  - no cache fix for dev mode
