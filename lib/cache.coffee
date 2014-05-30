@@ -107,6 +107,3 @@ module.exports = exports = (config) ->
         fetch (data) ->
           cache.set key, data, options.age, (err) ->
             res.send data
-
-
-
