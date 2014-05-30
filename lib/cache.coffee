@@ -89,7 +89,6 @@ module.exports = exports = (config) ->
             key = "#{protocol}://#{host}#{url_noquery}?#{query.join '&'}"
 
       # headers
-      val = 'private, max-age=0, no-cache, no-store, must-revalidate'
       if options.age == 0
         cval = 'private, max-age=0, no-cache, no-store, must-revalidate'
         sval = 'max-age=0'
