@@ -1,4 +1,4 @@
-**in progress**
+**v1.0.0** (2014-05-29)
 
  - add CHANGELOG
  - add gitignore
