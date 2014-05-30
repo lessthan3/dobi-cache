@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "Bryant Williams",
+    "email": "b.n.williams@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/lessthan3/dobi-cache/issues",
+    "email": "bryant@lessthan3.com"
+  },
+  "dependencies": {
+    "coffee-script":  "1.7.x"
+  },
+  "description": "Dobi.io Caching Middleware",
+  },
+  "homepage": "http://www.dobi.io",
+  "keywords": "dobi.io,lessthan3",
+  "main": "./lib/index",
+  "name": "dobi-cache",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lessthan3/dobi-cache.git"
+  },
+  "version": "0.1.0"
+}
