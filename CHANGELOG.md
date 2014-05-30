@@ -1,6 +1,8 @@
 **v1.1.0** (2014-05-29)
 
  - remove coffee-script dependency
+ - allow boolean options.query parameter for cache all/none
+ - add README.md
 
 **v1.0.0** (2014-05-29)
 
