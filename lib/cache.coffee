@@ -43,10 +43,10 @@ module.exports = exports = (config) ->
           fn req, req, callback
 
       # if disabled, don't use cache
-      return fetch(res.send) if config.disabled
+      return fetch((d) -> res.send d) if config.disabled
 
       # if it's a POST, don't use cache
-      return fetch(res.send) if req.method is 'POST'
+      return fetch((d) -> res.send d) if req.method is 'POST'
 
       # setup cache key
       protocol = req.protocol

@@ -1,3 +1,7 @@
+**v1.2.0** (2014-05-29)
+
+ - no cache fix for dev mode
+
 **v1.1.0** (2014-05-29)
 
  - remove coffee-script dependency
