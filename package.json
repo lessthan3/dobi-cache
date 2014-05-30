@@ -4,13 +4,12 @@
     "email": "b.n.williams@gmail.com"
   },
   "dependencies": {
-    "coffee-script":  "1.7.x",
     "mongo-cache":    "1.0.x"
   },
   "description": "Dobi.io Caching Middleware",
   "homepage": "http://www.dobi.io",
   "keywords": "dobi.io,lessthan3",
-  "main": "./lib/index",
+  "main": "./lib/cache",
   "name": "dobi-cache",
   "repository": {
     "type": "git",
