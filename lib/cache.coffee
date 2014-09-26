@@ -108,7 +108,11 @@ module.exports = exports = (config) ->
 
       # check cache
       cache.get key, (err, value) ->
-        return res.send value if value
-        fetch (data) ->
-          cache.set key, data, options.age, (err) ->
-            res.send data
+        if value
+          res.set 'Dobi-Cache', 'HIT'
+          res.send value
+        else
+          res.set 'Dobi-Cache', 'MISS'
+          fetch (data) ->
+            cache.set key, data, options.age, (err) ->
+              res.send data
