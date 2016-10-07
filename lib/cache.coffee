@@ -53,6 +53,9 @@ module.exports = exports = (config) ->
       # if it's a POST, don't use cache
       return fetch((d) -> res.send d) if req.method is 'POST'
 
+      # if query has a _ param, don't use cache
+      return fetch((d) -> res.send d) if req.query._
+
       # setup cache key
       protocol = req.protocol
       host = req.get 'host'
