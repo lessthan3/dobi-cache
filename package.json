@@ -4,16 +4,48 @@
     "email": "ari@maestro.io"
   },
   "dependencies": {
-    "mongo-cache":    "1.0.x"
+    "mongo-cache": "1.0.x"
   },
   "description": "Dobi.io Caching Middleware",
   "homepage": "http://www.dobi.io",
-  "keywords": "dobi.io,lessthan3",
+  "keywords": [
+    "dobi.io,lessthan3"
+  ],
   "main": "./lib/cache",
   "name": "dobi-cache-2",
   "repository": {
     "type": "git",
     "url": "git://github.com/lessthan3/dobi-cache.git"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "gitHead": "01eb1612f17a8d6b4b8e6aa54d06c111f72d201c",
+  "bugs": {
+    "url": "https://github.com/lessthan3/dobi-cache/issues"
+  },
+  "_id": "dobi-cache-2@1.0.0",
+  "scripts": {},
+  "_shasum": "c9ea4309ee0733b9f37de687d6e638c496c76b01",
+  "_from": "dobi-cache-2@1.0.0",
+  "_npmVersion": "3.3.12",
+  "_nodeVersion": "5.3.0",
+  "_npmUser": {
+    "name": "maestro_io",
+    "email": "ari@maestro.io"
+  },
+  "dist": {
+    "shasum": "c9ea4309ee0733b9f37de687d6e638c496c76b01",
+    "tarball": "https://registry.npmjs.org/dobi-cache-2/-/dobi-cache-2-1.0.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "maestro_io",
+      "email": "ari@maestro.io"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/dobi-cache-2-1.0.0.tgz_1475879928638_0.2949441308155656"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/dobi-cache-2/-/dobi-cache-2-1.0.0.tgz"
 }
