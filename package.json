@@ -4,16 +4,15 @@
     "email": "ari@maestro.io"
   },
   "dependencies": {
-    "mongo-cache":    "1.0.x"
+    "dobi-mongo-cache": "2.0.0"
   },
   "description": "Dobi.io Caching Middleware",
   "homepage": "http://www.dobi.io",
-  "keywords": "dobi.io,lessthan3",
   "main": "./lib/cache",
   "name": "dobi-cache-2",
   "repository": {
     "type": "git",
     "url": "git://github.com/lessthan3/dobi-cache.git"
   },
-  "version": "1.0.0"
-}
+  "version": "2.0.0"
+  }
