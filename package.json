@@ -4,7 +4,7 @@
     "email": "ari@maestro.io"
   },
   "dependencies": {
-    "mongo-cache":    "1.0.x"
+    "dobi-mongo-cache": "2.0.x"
   },
   "description": "Dobi.io Caching Middleware",
   "homepage": "http://www.dobi.io",
