@@ -1,6 +1,6 @@
 
 # dependencies
-MongoCache = require 'mongo-cache'
+MongoCache = require 'dobi-mongo-cache'
 
 # exports
 module.exports = exports = (config) ->
