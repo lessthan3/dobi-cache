@@ -1,5 +1,5 @@
 const express = require('express');
-const Cache = require('../lib/index');
+const { middleware: Cache } = require('../lib/index');
 
 const cache = Cache({
   disabled: false,
