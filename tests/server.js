@@ -1,10 +1,14 @@
 const express = require('express');
-const { middleware: Cache } = require('../lib/index');
+const Cache = require('../lib');
 
-const cache = Cache({
+const cacheInstance = new Cache({
   disabled: false,
   redisUri: 'localhost',
 });
+// console.log({ cache: cacheInstance.middleware.toString(), flushCache: cacheInstance.flushCache });
+const cache = (...args) => {
+  cacheInstance.middleware(...args);
+};
 
 const app = express();
 app.get('/', (req, res, next) => {
