@@ -4,8 +4,7 @@
     "email": "ari@maestro.io"
   },
   "dependencies": {
-    "dobi-mongo-cache": "3.0.2",
-    "lodash": "^4.17.10",
+    "ioredis": "^4.0.0",
     "parseurl": "^1.3.2"
   },
   "description": "Dobi.io Caching Middleware",
@@ -14,6 +13,8 @@
   "main": "./lib/index",
   "name": "dobi-cache-2",
   "scripts": {
+    "format": "eslint . --ext js --fix",
+    "lint": "eslint . --ext js",
     "test": "NODE_ENV=test jest --verbose --no-cache --collectCoverage=false",
     "test:coverage": "NODE_ENV=test jest --verbose --no-cache --collectCoverage=true",
     "test:watch": "NODE_ENV=test jest --watch --no-cache --verbose --collectCoverage=false"
@@ -22,8 +23,11 @@
     "type": "git",
     "url": "git://github.com/lessthan3/dobi-cache.git"
   },
-  "version": "2.0.0",
+  "version": "3.0.2",
   "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "express": "^4.16.3",
     "jest": "^23.5.0",
     "supertest": "^3.2.0"
