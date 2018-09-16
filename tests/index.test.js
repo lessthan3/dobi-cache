@@ -45,6 +45,7 @@ describe('dobi-cacheHelper', () => {
 
     const resp2 = await request(connectedApp).get('/');
     if (resp2.headers['dobi-cache'] === 'MISS') {
+      // eslint-disable-next-line no-console
       console.error('run redis locally to test');
     }
     expect(resp2.headers['dobi-cache']).toBe('HIT');

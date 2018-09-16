@@ -1,3 +1,10 @@
+**3.0.6** (2018-09-16)
+  - remove coffeescript, convert to es6
+  - support for node 10
+  - remove mongodb cache support
+  - integrate redis support
+  - developer changes: add jest testing
+
 **1.3.1** (2014-09-25)
 
  - set Dobi-Cache header
@@ -8,19 +15,19 @@
 
 **1.2.0** (2014-05-29)
 
- - no cacheHelper fix for dev mode
+ - no cache fix for dev mode
 
 **1.1.0** (2014-05-29)
 
  - remove coffee-script dependency
- - allow boolean options.query parameter for cacheHelper all/none
+ - allow boolean options.query parameter for cache all/none
  - add README.md
 
 **1.0.0** (2014-05-29)
 
  - add CHANGELOG
  - add gitignore
- - do not cacheHelper POST requests
+ - do not cache POST requests
  - allow options.qs for backwards compatibility
 
 **0.1.0** (2014-05-29)

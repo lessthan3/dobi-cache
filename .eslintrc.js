@@ -19,7 +19,7 @@ module.exports = {
       files: [
         '**/*.test.{m,}js',
         '**/test.{m,}js',
-        '**/test/**',
+        '**/tests/**'
       ],
       rules: {
         'import/no-extraneous-dependencies': [
