@@ -7,23 +7,30 @@ const Cache = require('../lib');
 const appGenerator = require('./server');
 
 const cacheFlushTester = new Cache({
-  disabled: false,
+  enabled: true,
+  keyPrefix: 'flushTest',
+  redisUri: 'localhost',
+});
+
+const cacheDisabled = new Cache({
+  enabled: false,
   keyPrefix: 'flushTest',
   redisUri: 'localhost',
 });
 
 const cacheServer = new Cache({
-  disabled: false,
+  enabled: true,
   redisUri: 'localhost',
 });
 
 const cacheDisconnected = new Cache({
-  disabled: false,
+  enabled: true,
   redisUri: 'failfailfail',
 });
 
 let connectedApp;
 let disconnectedApp;
+let disabledApp;
 beforeAll(async () => {
   await cacheFlushTester.cacheHelper.connect();
   const promises = ['a', 'b', 'c', 'd'].map(async (key) => {
@@ -36,19 +43,22 @@ beforeAll(async () => {
 
   connectedApp = appGenerator(cacheServer.cache);
   disconnectedApp = appGenerator(cacheDisconnected.cache);
+  disabledApp = appGenerator(cacheDisabled.cache);
 });
 
 describe('dobi-cacheHelper', () => {
   it('works as a cacheHelper', async () => {
     const resp = await request(connectedApp).get('/');
     expect(resp.headers['dobi-cache']).toBe('MISS');
-
     const resp2 = await request(connectedApp).get('/');
-    if (resp2.headers['dobi-cache'] === 'MISS') {
-      // eslint-disable-next-line no-console
-      console.error('run redis locally to test');
-    }
     expect(resp2.headers['dobi-cache']).toBe('HIT');
+  });
+
+  it('works if disabled', async () => {
+    const resp = await request(disabledApp).get('/');
+    expect(resp.headers['dobi-cache']).toBe(undefined);
+    const resp2 = await request(disabledApp).get('/');
+    expect(resp2.headers['dobi-cache']).toBe(undefined);
   });
 
   it('allows bypass', async () => {
