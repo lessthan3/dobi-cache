@@ -1,24 +1,34 @@
 
 == Usage
 
-```
-  cache = require('dobi-cache')(config)
-  app.get '/', (req, res, next) ->
+```js
+  const Cache = require('dobi-cache');
+  const { cache, flushCache } = new Cache({
+    disabled: false,
+    keyPrefix: 'myKeyPrefix',
+    redisUri: 'localhost'
+  });
+
+
+  app.get('/', (req, res, next) => {
     console.log 'do something'
-    cache('5 minutes', (next) ->
-      next 'hello world'
-    )(req, res, next)
+    cache('5 minutes', (callback) => {
+      callback 'hello world'
+    })(req, res);
+  })
 
-  app.get '/foo', cache '5 minutes', (next) ->
-    next 'data'
 
-  app.get '/bar', cache {
-    age: 300
-    query: ['name', 'title']
-  }
+  app.get('/foo', cache('5 minutes', (callback) => {
+    next('data');
+  });
 
-  app.get '/bar', cache {
+  app.get('/bar', cache({
+    age: 300,
+    query: ['name', 'title'],
+  });
+
+  app.get('/bar', cache({
     age: '5 minutes'
     query: '*'
-  }
+  });
 ```

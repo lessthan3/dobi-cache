@@ -1,3 +1,10 @@
+**3.0.6** (2018-09-16)
+  - remove coffeescript, convert to es6
+  - support for node 10
+  - remove mongodb cache support
+  - integrate redis support
+  - developer changes: add jest testing
+
 **1.3.1** (2014-09-25)
 
  - set Dobi-Cache header
