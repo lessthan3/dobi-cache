@@ -15,8 +15,8 @@
   "main": "./lib/index",
   "name": "dobi-cache-2",
   "scripts": {
-    "format": "eslint . --ext js --fix",
-    "lint": "eslint . --ext js",
+    "format": "eslint . --ext js,mjs --fix",
+    "lint": "eslint . --ext js,mjs",
     "test": "NODE_ENV=test jest --verbose --no-cache --collectCoverage=false",
     "test:coverage": "NODE_ENV=test jest --verbose --no-cache --collectCoverage=true",
     "test:watch": "NODE_ENV=test jest --watch --no-cache --verbose --collectCoverage=false"
@@ -29,13 +29,21 @@
     "node": ">= 10",
     "yarn": "^1.10.1"
   },
-  "version": "3.0.11",
+  "version": "4.0.00",
   "devDependencies": {
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0-rc.1",
+    "babel-core": "^7.0.0-0",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
+    "babel-plugin-dynamic-import-node": "^2.0.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "express": "^4.16.3",
     "jest": "^23.5.0",
+    "koa": "^2.6.1",
+    "koa-router": "^7.4.0",
     "supertest": "^3.2.0"
   }
 }
