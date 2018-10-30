@@ -46,12 +46,27 @@ beforeAll(async () => {
   disabledApp = appGenerator({ cache: cacheDisabled.cache, port: 3002 });
 });
 
+afterAll(() => {
+  connectedApp.close();
+  disconnectedApp.close();
+  disabledApp.close();
+});
+
 describe('dobi-cacheHelper', () => {
   it('works as a cacheHelper', async () => {
-    const resp = await request(connectedApp).get('/');
-    expect(resp.headers['dobi-cache']).toBe('MISS');
-    const resp2 = await request(connectedApp).get('/');
-    expect(resp2.headers['dobi-cache']).toBe('HIT');
+    const small = await request(connectedApp).get('/');
+    expect(small.headers['dobi-cache']).toBe('MISS');
+    const small2 = await request(connectedApp).get('/');
+    expect(small2.headers['dobi-cache']).toBe('HIT');
+  });
+
+  it('compresses large objects', async () => {
+    const big = await request(connectedApp).get('/bigtext');
+    expect(big.headers['dobi-cache']).toBe('MISS');
+    expect(big.headers['content-encoding']).toEqual('gzip');
+    const big2 = await request(connectedApp).get('/bigtext');
+    expect(big2.headers['dobi-cache']).toBe('HIT');
+    expect(big2.headers['content-encoding']).toEqual('gzip');
   });
 
   it('works if disabled', async () => {
