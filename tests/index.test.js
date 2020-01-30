@@ -75,6 +75,14 @@ describe('dobi-cacheHelper', () => {
     expect(big2.text).toEqual(firstResponse);
   });
 
+  it('caches params separately', async () => {
+    const big = await request(connectedApp).get('/?name=one');
+    const firstResponse = big.text;
+    const big2 = await request(connectedApp).get('/?name=two');
+    expect(big2.headers['x-dobi-cache']).toBe('MISS');
+    expect(big2.text).not.toEqual(firstResponse);
+  });
+
   it('works if disabled', async () => {
     const resp = await request(disabledApp).get('/');
     expect(resp.headers['x-dobi-cache']).toBe(undefined);

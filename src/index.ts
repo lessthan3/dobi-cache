@@ -31,7 +31,7 @@ interface IGenerateKey {
 const defaultConfig: ICacheConfig = {
   age: 300, // default 5 minutes cache,
   headers: {},
-  query: [],
+  query: ['*'],
 }
 
 class Index {
