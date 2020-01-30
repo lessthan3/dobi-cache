@@ -1,16 +1,19 @@
 const Koa = require('koa');
 const Router = require('koa-router');
+const { Readable } = require('stream');
 
-module.exports = ({ cache, port }) => {
+const run = ({ cache, port }) => {
   const app = new Koa();
   const router = new Router();
   router.get('/bigtext', cache({ age: '5 minutes' }), (ctx) => {
     ctx.set('content-type', 'text/plain');
-    const output = [];
+    const r = new Readable()
+    ctx.body = r;
     for (let i = 0; i < 2048; i++) {
-      output.push(' ');
+      r.push('UnitedStatesOfAmerica');
     }
-    ctx.body = Buffer.from(output.join(''));
+    r.push(null);
+
   });
   router.get('/', cache({ age: '5 minutes' }), (ctx) => {
     ctx.body = 'hello world';
@@ -19,3 +22,5 @@ module.exports = ({ cache, port }) => {
   app.use(router.allowedMethods());
   return app.listen(port);
 };
+
+module.exports = run;
