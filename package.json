@@ -4,7 +4,11 @@
     "email": "ari@maestro.io"
   },
   "dependencies": {
+    "@types/ioredis": "^4.14.6",
+    "@types/koa": "^2.11.0",
+    "@types/lodash": "^4.14.149",
     "@types/node": "^13.5.2",
+    "@types/stream-to-array": "^2.3.0",
     "ioredis": "^4.0.0",
     "koa-is-json": "^1.0.0",
     "lodash": "^4.17.15",
@@ -18,10 +22,10 @@
   "types": "./dist/index.d.ts",
   "name": "dobi-cache-2",
   "scripts": {
-    "build": "yarn tsc",
-    "format": "yarn lint --fix",
+    "build": "tsc",
+    "format": "npm run lint --fix",
     "lint": "tslint --format stylish -p tsconfig.json",
-    "postinstall": "yarn tsc",
+    "postinstall": "tsc",
     "test": "NODE_ENV=test jest --verbose --no-cache --collectCoverage=false",
     "test:coverage": "NODE_ENV=test jest --verbose --no-cache --collectCoverage=true",
     "test:watch": "NODE_ENV=test jest --watch --no-cache --verbose --collectCoverage=false"
@@ -33,14 +37,10 @@
   "engines": {
     "node": ">= 10"
   },
-  "version": "4.1.1",
+  "version": "4.1.4",
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",
     "@babel/plugin-transform-modules-commonjs": "^7.0.0-rc.1",
-    "@types/ioredis": "^4.14.6",
-    "@types/koa": "^2.11.0",
-    "@types/lodash": "^4.14.149",
-    "@types/stream-to-array": "^2.3.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^8.2.6",
     "babel-jest": "^23.4.2",
