@@ -1,0 +1,35 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+      "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "forin": false,
+    "member-access": [true, "no-public"],
+    "member-ordering": [
+      true,
+      {
+        "order": "fields-first",
+        "alphabetize": true
+      }
+    ],
+    "quotemark": [true, "single"],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "single-line": "never",
+        "esSpecCompliant": true
+      }
+    ],
+    "variable-name": [
+      true,
+      "allow-leading-underscore"
+    ]
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["**/dist/**/*.ts", "test/**/*.ts"]
+  }
+}
