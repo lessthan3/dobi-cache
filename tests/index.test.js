@@ -2,7 +2,7 @@
 
 jest.setTimeout(100000);
 const request = require('supertest');
-const Cache = require('../lib');
+const Cache = require('../lib').default;
 
 const appGenerator = require('./server');
 
@@ -41,29 +41,47 @@ beforeAll(async () => {
   await cacheServer.cacheHelper.connect();
   await cacheServer.flushCache();
 
-  connectedApp = appGenerator(cacheServer.cache);
-  disconnectedApp = appGenerator(cacheDisconnected.cache);
-  disabledApp = appGenerator(cacheDisabled.cache);
+  connectedApp = appGenerator({ cache: cacheServer.cache, port: 3000 });
+  disconnectedApp = appGenerator({ cache: cacheDisconnected.cache, port: 3001 });
+  disabledApp = appGenerator({ cache: cacheDisabled.cache, port: 3002 });
+});
+
+afterAll(() => {
+  connectedApp.close();
+  disconnectedApp.close();
+  disabledApp.close();
 });
 
 describe('dobi-cacheHelper', () => {
   it('works as a cacheHelper', async () => {
-    const resp = await request(connectedApp).get('/');
-    expect(resp.headers['dobi-cache']).toBe('MISS');
-    const resp2 = await request(connectedApp).get('/');
-    expect(resp2.headers['dobi-cache']).toBe('HIT');
+    const small = await request(connectedApp).get('/');
+    expect(small.headers['dobi-cache']).toBe('MISS');
+    const small2 = await request(connectedApp).get('/');
+    expect(small2.headers['dobi-cache']).toBe('HIT');
+  });
+
+  it('compresses large objects', async () => {
+    const big = await request(connectedApp).get('/bigtext');
+    expect(big.headers['dobi-cache']).toBe('MISS');
+    const firstResponse = big.text;
+    const big2 = await request(connectedApp).get('/bigtext');
+    expect(big2.headers['dobi-cache']).toBe('HIT');
+    expect(big2.text).toEqual(firstResponse);
   });
 
   it('works if disabled', async () => {
     const resp = await request(disabledApp).get('/');
     expect(resp.headers['dobi-cache']).toBe(undefined);
+    expect(resp.text).toBe('hello world');
     const resp2 = await request(disabledApp).get('/');
     expect(resp2.headers['dobi-cache']).toBe(undefined);
+    expect(resp2.text).toBe('hello world');
   });
 
   it('allows bypass', async () => {
     const resp = await request(connectedApp).get('/?_=234234234');
     expect(resp.headers['dobi-cache']).not.toBeTruthy();
+    expect(resp.text).toBe('hello world');
   });
 
   it('flushes correctly', async () => {
@@ -74,5 +92,6 @@ describe('dobi-cacheHelper', () => {
   it('doesn\'t crash if not connected to redis', async () => {
     const resp = await request(disconnectedApp).get('/');
     expect(resp.headers['dobi-cache']).toBe('MISS');
+    expect(resp.text).toBe('hello world');
   });
 });
