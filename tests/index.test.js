@@ -41,9 +41,9 @@ beforeAll(async () => {
 
   await cacheServer.flushCache();
 
-  connectedApp = appGenerator({ cache: cacheServer.cache, port: 3000 });
-  disconnectedApp = appGenerator({ cache: cacheDisconnected.cache, port: 3001 });
-  disabledApp = appGenerator({ cache: cacheDisabled.cache, port: 3002 });
+  connectedApp = appGenerator({ cache: cacheServer.cache, port: 4200 });
+  disconnectedApp = appGenerator({ cache: cacheDisconnected.cache, port: 4201 });
+  disabledApp = appGenerator({ cache: cacheDisabled.cache, port: 4202 });
 });
 
 afterAll(() => {
@@ -81,6 +81,15 @@ describe('dobi-cacheHelper', () => {
     const big2 = await request(connectedApp).get('/?name=two');
     expect(big2.headers['x-dobi-cache']).toBe('MISS');
     expect(big2.text).not.toEqual(firstResponse);
+  });
+
+  it('caches dependent of param order', async () => {
+    const req1 = await request(connectedApp).get('/?name=one&style=hello&alpha=foo');
+    const firstResponse = req1.text;
+    const req2 = await request(connectedApp).get('/?style=hello&alpha=foo&name=one');
+    expect(req2.headers['x-dobi-cache']).toBe('HIT');
+    const req3 = await request(connectedApp).get('/?style=hello&name=one&alpha=foo');
+    expect(req3.headers['x-dobi-cache']).toBe('HIT');
   });
 
   it('works if disabled', async () => {

@@ -111,7 +111,6 @@ class Index {
   static generateKey({ctx, query}: IGenerateKey): string {
     const {
       hostname,
-      originalUrl,
       path,
       protocol,
       query: requestQuery,
@@ -119,7 +118,11 @@ class Index {
 
     let key = `${protocol}://${hostname}${path}`;
     if (query.includes('*')) {
-      key = `${protocol}://${hostname}${originalUrl}`
+      const keyQuery = Object.keys(requestQuery).sort().reduce<Record<string, string>>((obj, field) => ({
+        ...obj,
+        [field]: requestQuery[field],
+      }), {});
+      key = `${protocol}://${hostname}${path}?${stringify(keyQuery)}`
     } else if (query.length) {
       const keyQuery = query.sort().reduce<Record<string, any>>((obj, field) => ({
         ...obj,
