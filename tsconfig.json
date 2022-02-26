@@ -16,7 +16,7 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "ESNEXT",
+    "target": "ES6",
     "types": ["node"]
   },
   "include": ["src"],
