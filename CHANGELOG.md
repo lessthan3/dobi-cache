@@ -1,3 +1,6 @@
+**5.0.0** (2021-02-25)
+  - add support for clustered redis
+
 **3.0.6** (2018-09-16)
   - remove coffeescript, convert to es6
   - support for node 10

@@ -9,6 +9,8 @@ const appGenerator = require('./server');
 const cacheFlushTester = new Cache({
   enabled: true,
   keyPrefix: prefix,
+  redisModeMap: { 'localhost': 'clustered'},
+  redisPort: 30001,
   redisUri: 'localhost',
 });
 

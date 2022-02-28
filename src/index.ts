@@ -19,6 +19,8 @@ interface ICacheConfig {
 interface IConstructor {
   enabled: boolean;
   keyPrefix: string;
+  redisModeMap?: Record<string, string>;
+  redisPort?: number;
   redisUri: string;
 }
 
@@ -39,7 +41,10 @@ class Index {
   private _redisDriver: RedisDriver;
   constructor(params: IConstructor) {
     this._enabled = params.enabled;
-    this._redisDriver = new RedisDriver(params);
+    this._redisDriver = new RedisDriver({
+      redisModeMap: { default: 'single'},
+      ...params,
+    });
     this.cache = this.cache.bind(this);
   }
 
@@ -220,6 +225,10 @@ class Index {
       return 0;
     }
     return this._redisDriver.flushCache();
+  }
+
+  getRedisDriver(): RedisDriver {
+    return this._redisDriver;
   }
 }
 
