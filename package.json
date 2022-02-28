@@ -20,6 +20,7 @@
     "build": "tsc",
     "format": "npm run lint --fix",
     "lint": "tslint --format stylish -p tsconfig.json",
+    "prepublishOnly": "NODE_ENV=production npm run build",
     "test": "NODE_ENV=test jest --verbose --no-cache --collectCoverage=false",
     "test:coverage": "NODE_ENV=test jest --verbose --no-cache --collectCoverage=true",
     "test:watch": "NODE_ENV=test jest --watch --no-cache --verbose --collectCoverage=false"
@@ -31,7 +32,7 @@
   "engines": {
     "node": ">= 10"
   },
-  "version": "5.0.7",
+  "version": "5.0.8",
   "devDependencies": {
     "@types/koa": "^2.11.0",
     "@types/lodash": "^4.14.149",
