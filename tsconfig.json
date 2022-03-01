@@ -17,7 +17,7 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "ESNEXT",
+    "target": "es5",
     "types": ["node"]
   },
   "include": ["src"],
